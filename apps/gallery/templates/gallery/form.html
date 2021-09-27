@@ -1,0 +1,43 @@
+{% extends "gallery/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+       
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Imagen a subir</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class=" mb-3">
+                <label for="name">Nombres y Apellido</label>
+                {{ form.name }}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.image }}
+
+            </div>
+                <input class="btn btn-xl btn-outline-light" id="submitButton" type="submit" value="cargar imagen" />
+        </form>
+    </div>
+</header>
+
+<script>
+function replaceName(e){
+  e.value = e.value.replace(/ /g, "-")
+}
+</script>
+
+
+{% endblock%}
+
+

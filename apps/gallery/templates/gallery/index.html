@@ -1,0 +1,113 @@
+{% extends "gallery/base.html" %}
+{% load static %}
+
+{% block content %}
+<header class="masthead bg-primary text-white text-center">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</header>
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Imagenes</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <!-- Portfolio Item 1-->
+            {% for image in object_list %}
+
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal"
+                    data-bs-target="#portfolioModal{{image.name}}">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="/media/{{ image.image }}" alt="..." />
+                </div>
+            </div>
+
+            {% endfor%}
+
+</section>
+
+{% for image in object_list %}
+<div class="portfolio-modal modal fade" id="portfolioModal{{image.name}}" tabindex="-1"
+    aria-labelledby="portfolioModal{{image.name}}" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                    aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{image.name}}</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="/media/{{ image.image }}" alt="..." />
+                            <!-- Portfolio Modal - Text-->
+                            <p class="mb-4"></p>
+                            <button type="button" class="btn btn-primary me-md-2" id="eliminar{{image.name}}">
+                                <i
+                                class="fas fa-times fa-fw"></i> Eliminar
+                            </button>
+
+                            <!-- <a  href="{% url 'gallery:image_delete' image.pk %}" class="btn btn-primary me-md-2"> <i
+                                    class="fas fa-times fa-fw"></i> Eliminar</a> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal{{image.name}}" tabindex="-1" aria-labelledby="exampleModalLabel{{image.name}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel{{image.name}}">Eliminar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Esta seguro que desea eliminar la imagen ? </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a  href="{% url 'gallery:image_delete' image.pk %}" class="btn btn-primary"> <i
+                    class="fas fa-times fa-fw"></i> Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor%}
+  <script>
+    $(document).ready(function () {
+      //obtenemos el valor de los input
+      {% for image in object_list %}
+      $('#eliminar{{image.name}}').click(function () {
+        console.log("click clikc {{image.name}}")
+        $('#exampleModal{{image.name}}').modal('show');
+  
+      });
+      {% endfor%} 
+         
+         
+    });
+  
+  </script>
+
+
+{% endblock%}

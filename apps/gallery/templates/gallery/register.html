@@ -1,0 +1,67 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+{% extends "gallery/baseLogin.html" %}
+{% load static %}
+
+{% block content %}
+<div class="main">
+	<div class="col-md-6 col-sm-12">
+		<div class="register-form">
+			<form method="POST">
+				{% csrf_token %}
+                
+          
+                  {% if msg %}
+                      <h4 class="fw-300 c-grey-900 mB-40">{{ msg | safe }}</h4>
+                  {% else %}
+                      <p class="fw-300 c-grey-900 mB-40">
+                        Llene todos los campos 
+                      </p>
+                  {% endif %}
+          
+          
+                
+          
+                    <div class="form-group">
+                      <label class="text-normal text-dark">Username</label>
+                      {{ form.username }}
+                    </div>
+                    <span class="text-error">{{ form.username.errors }}</span>
+          
+                    <div class="form-group">
+                      <label class="text-normal text-dark">eMail Address</label>
+                      {{ form.email }}
+                    </div>
+                    <span class="text-error">{{ form.email.errors }}</span>
+          
+                    <div class="form-group">
+                      <label class="text-normal text-dark">Password</label>
+                      {{ form.password1 }}
+                    </div>
+                    <span class="text-error">{{ form.password1.errors }}</span>
+          
+                    <div class="form-group">
+                      <label class="text-normal text-dark">Password</label>
+                      {{ form.password2 }}
+                    </div>
+                    <span class="text-error">{{ form.password1.errors }}</span>
+          
+                    <div class="form-group">
+                      <button type="submit" name="register"class="btn btn-black">Registrar</button> 
+          
+                      &nbsp; &nbsp;
+                      <span class="text-small font-weight-semibold">Ya tienes una cuenta?</span>
+                      <a href="{% url 'login' %}" class="text-black text-small">Inicia Sesion</a>    
+                    </div>
+          
+                  
+				
+			
+				
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock%}
