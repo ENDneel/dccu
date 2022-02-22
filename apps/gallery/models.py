@@ -1,5 +1,5 @@
 from django.db import models
-
+#modelo de imagen 
 class Image(models.Model):
     name = models.CharField(max_length=50)
     fecha =models.DateField(auto_now_add=True, verbose_name="Fecha")

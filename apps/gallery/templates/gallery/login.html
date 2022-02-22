@@ -7,7 +7,9 @@
 {% block content %}
 <div class="main">
 	<div class="col-md-6 col-sm-12">
+		
 		<div class="login-form">
+			<p>Conoce nuestra app movil usa el siguiente enlace para descargarlo. <a href="{% url 'gallery:descarga_apk' %}">Descargar</a></p>
 			<form method="POST">
 				{% csrf_token %}
 				<div class="form-group">
